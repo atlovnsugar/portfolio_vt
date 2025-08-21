@@ -553,12 +553,12 @@ const App = () => {
                   >
                     {article.title}
                   </h3>
-                  <p
+                  {/* Render HTML content, including images, in the excerpt/preview */}
+                  <div
                     className="mb-4 text-sm"
                     style={{ color: theme.textSecondary }}
-                  >
-                    {article.excerpt}
-                  </p>
+                    dangerouslySetInnerHTML={{ __html: article.excerpt }}
+                  />
                   <button
                     className="font-medium transition-colors"
                     style={{ color: theme.accent }}
@@ -616,7 +616,7 @@ const App = () => {
             {/* <div className="md:w-1/3 flex justify-center">
               <div className="relative">
                 <img
-                  src={portfolioData.about.image || "https://placehold.co/300x400/1a1a1a/e0e0e0?text=Profile+Pic"}
+                  src={portfolioData.about.image || "  https://placehold.co/300x400/1a1a1a/e0e0e0?text=Profile+Pic"}
                   alt="Vojtěch Tabačík"
                   className="rounded-lg shadow-md w-full max-w-xs"
                 />
@@ -629,12 +629,12 @@ const App = () => {
               </div>
             </div> */}
             <div className="md:w-2/3">
-              <div className="prose prose-invert max-w-none">
-                {/* Uses loaded data */}
-                <p style={{ color: theme.textSecondary }}>
-                  {portfolioData.about.text}
-                </p>
-              </div>
+              {/* Render HTML content, including images, for the About section */}
+              <div
+                className="prose prose-invert max-w-none"
+                style={{ color: theme.text }}
+                dangerouslySetInnerHTML={{ __html: portfolioData.about.text }}
+              />
             </div>
           </div>
         </div>
@@ -776,6 +776,8 @@ const App = () => {
               </div>
             </div>
           </div>
+          {/* --- Removed the "Pojďme spolu něco vytvořit" section --- */}
+          {/* 
           <div
             className="rounded-lg p-8 flex items-center justify-center"
             style={{
@@ -798,7 +800,6 @@ const App = () => {
               >
                 Máte nápad na webový projekt? Rád se s vámi o něj podělím a pomohu ho uskutečnit.
               </p>
-              {/* Uses loaded data */}
               <a
                 href={`mailto:${portfolioData.contact.email}`}
                 className="inline-block px-6 py-3 rounded font-bold transition-all duration-300 border"
@@ -822,6 +823,7 @@ const App = () => {
               </a>
             </div>
           </div>
+          */}
         </div>
       </div>
     </div>
