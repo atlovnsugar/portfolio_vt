@@ -1,8 +1,26 @@
 [
-  { "name": "JavaScript (ES6+)", "level": 90 },
-  { "name": "React", "level": 85 },
-  { "name": "HTML5 / CSS3", "level": 95 },
-  { "name": "UI/UX Design", "level": 80 },
-  { "name": "Node.js", "level": 70 },
-  { "name": "Git / CI/CD", "level": 75 }
+  {
+    "name": "JavaScript (ES6+)",
+    "level": 90
+  },
+  {
+    "name": "React",
+    "level": 85
+  },
+  {
+    "name": "HTML5 / CSS3",
+    "level": 95
+  },
+  {
+    "name": "UI/UX Design",
+    "level": 80
+  },
+  {
+    "name": "Node.js",
+    "level": 70
+  },
+  {
+    "name": "Git / CI/CD",
+    "level": 75
+  }
 ]
