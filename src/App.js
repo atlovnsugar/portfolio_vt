@@ -1,3 +1,4 @@
+// App.js
 import React, { useState, useEffect } from 'react';
 import { MapPin, Phone, Mail, Clock, Menu, X, Github, Linkedin, FileText, Code, Palette, Zap } from 'lucide-react';
 
@@ -6,91 +7,25 @@ const App = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [selectedArticle, setSelectedArticle] = useState(null);
 
-  // --- Portfolio Data (Replace with your actual data) ---
+  // --- State for data loaded from JSON files ---
   const [portfolioData, setPortfolioData] = useState({
-    name: "Vojtěch Tabačík",
-    tagline: "Frontend Developer & UI/UX Designer",
-    bio: "Jsem vášnivý frontend developer a designér s rámcem pro vytváření intuitivních a vizuálně úžasných webových aplikací. Mám rád výzvy a neustále se učím novým technologiím.",
+    name: "Načítám...",
+    tagline: "",
+    bio: "",
     contact: {
-      email: "vojtech@tabacik.cz",
-      phone: "+420 123 456 789",
-      address: "Praha, Česká republika",
-      github: "https://github.com/vas_github",
-      linkedin: "https://linkedin.com/in/vas_linkedin"
+      email: "",
+      phone: "",
+      address: "",
+      github: "",
+      linkedin: ""
     },
-    skills: [
-      { name: "JavaScript (ES6+)", level: 90 },
-      { name: "React", level: 85 },
-      { name: "HTML5 / CSS3", level: 95 },
-      { name: "UI/UX Design", level: 80 },
-      { name: "Node.js", level: 70 },
-      { name: "Git / CI/CD", level: 75 }
-    ],
-    projects: [
-      {
-        id: 1,
-        title: "E-commerce Platform",
-        description: "Moderní e-shop postavený na React a Node.js s pokročilým vyhledáváním a filtry.",
-        technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-        image: "/images/project1.jpg", // Replace with your image path
-        link: "#" // Add project link if available
-      },
-      {
-        id: 2,
-        title: "Task Management App",
-        description: "Aplikace pro správu úkolů s drag-and-drop funkcí a real-time spoluprací.",
-        technologies: ["React", "Firebase", "Material-UI"],
-        image: "/images/project2.jpg", // Replace with your image path
-        link: "#"
-      },
-      {
-        id: 3,
-        title: "Portfolio Website",
-        description: "Responsive portfolio webová stránka s animacemi a optimalizovaným UX.",
-        technologies: ["React", "Framer Motion", "Tailwind CSS"],
-        image: "/images/project3.jpg", // Replace with your image path
-        link: "#"
-      }
-    ],
-    articles: [
-      {
-        id: 1,
-        title: "Proč jsem si vybral React?",
-        date: "15. dubna 2024",
-        readTime: "5 min čtení",
-        excerpt: "Přehled důvodů, proč je React skvělý nástroj pro moderní vývoj webových aplikací.",
-        // Example content with an image
-        content: `
-          <p>React se stal jedním z nejpopulárnějších JavaScriptových frameworků pro tvorbu uživatelských rozhraní. Zde je několik důvodů, proč:</p>
-          <img src="/images/react_example.jpg" alt="Příklad React komponenty" style="max-width:100%; height:auto; border-radius: 8px; margin: 20px 0;">
-          <ul>
-            <li><strong>Komponentový přístup:</strong> Umožňuje znovupoužití kódu a lepší organizaci.</li>
-            <li><strong>Virtual DOM:</strong> Zajišťuje rychlé a efektivní aktualizace UI.</li>
-            <li><strong>Bohatý ekosystém:</strong> Obrovské množství knihoven a nástrojů.</li>
-            <li><strong>Silná komunita:</strong> Skvělá podpora a neustálý vývoj.</li>
-          </ul>
-          <p>Můj osobní zážitek s Reactem byl velmi pozitivní...</p>
-        `
-      },
-      {
-        id: 2,
-        title: "Tipy pro UI/UX design",
-        date: "3. března 2024",
-        readTime: "8 min čtení",
-        excerpt: "Základní principy a tipy, jak vytvářet uživatelsky přívětivé a estetické rozhraní.",
-        content: "<p>Obsah článku o UI/UX...</p>" // Add your content here
-      }
-    ],
+    skills: [],
+    projects: [],
+    articles: [],
     about: {
-      text: "Ahoj! Jmenuji se Vojtěch Tabačík. Jsem frontend developer a UI/UX designér s více než 5 lety zkušeností ve vývoji moderních webových aplikací. Mým cílem je vytvářet produkty, které nejsou jen funkční, ale i krásné a snadno použitelné. Věnuji se neustálému vzdělávání a sleduji nejnovější trendy ve světě frontendu.",
-      // You can add an image path here if you want
-      // image: "/images/about_me.jpg"
-    },
-    hours: [ // Example, adjust as needed
-      { day: "Pondělí - Pátek", time: "9:00 - 17:00" },
-      { day: "Sobota", time: "Zavřeno" },
-      { day: "Neděle", time: "Zavřeno" }
-    ]
+      text: ""
+    }
+    // Removed 'hours' as it wasn't consistently used in the UI components provided
   });
 
   // --- Cyberpunk Theme Definition ---
@@ -110,6 +45,70 @@ const App = () => {
 
   const theme = cyberpunkTheme;
 
+  // --- Load data from JSON files ---
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        // Fetch all required data files concurrently
+        const [
+          generalInfoRes,
+          skillsRes,
+          projectsRes,
+          articlesRes,
+          aboutRes
+        ] = await Promise.all([
+          fetch('/data/generalInfo.json'),
+          fetch('/data/skills.json'),
+          fetch('/data/projects.json'),
+          fetch('/data/articles.json'),
+          fetch('/data/about.json')
+        ]);
+
+        // Check if all responses are ok
+        if (!generalInfoRes.ok || !skillsRes.ok || !projectsRes.ok || !articlesRes.ok || !aboutRes.ok) {
+            throw new Error('Failed to load one or more data files.');
+        }
+
+        // Parse JSON data
+        const generalInfoData = await generalInfoRes.json();
+        const skillsData = await skillsRes.json();
+        const projectsData = await projectsRes.json();
+        const articlesData = await articlesRes.json();
+        const aboutData = await aboutRes.json();
+
+        // Combine data into the structure expected by the components
+        const loadedData = {
+          name: generalInfoData.name || "Vojtěch Tabačík",
+          tagline: generalInfoData.tagline || "",
+          bio: generalInfoData.bio || "", // Assuming bio is in generalInfo
+          contact: {
+            email: generalInfoData.contact?.email || "",
+            phone: generalInfoData.contact?.phone || "",
+            address: generalInfoData.contact?.address || "",
+            github: generalInfoData.contact?.github || "",
+            linkedin: generalInfoData.contact?.linkedin || ""
+          },
+          skills: skillsData,
+          projects: projectsData,
+          articles: articlesData,
+          about: {
+            text: aboutData.text || ""
+            // image: aboutData.image || "" // If you add image support later
+          }
+          // hours: generalInfoData.hours || [] // If you use hours, uncomment and adjust
+        };
+
+        setPortfolioData(loadedData);
+      } catch (error) {
+        console.error("Error loading portfolio data:", error);
+        // Optionally, set an error state to display a message to the user
+      }
+    };
+
+    loadData();
+  }, []); // Empty dependency array means this runs once on mount
+
+
   // --- Components ---
 
   const Navigation = () => (
@@ -128,7 +127,7 @@ const App = () => {
                 className="ml-3 text-xl font-bold"
                 style={{ color: theme.primary, textShadow: `0 0 5px ${theme.primary}80` }}
               >
-                {portfolioData.name}
+                {portfolioData.name} {/* Uses loaded data */}
               </span>
             </div>
           </div>
@@ -232,13 +231,13 @@ const App = () => {
             className="text-4xl md:text-6xl font-extrabold mb-6"
             style={{ color: theme.primary, textShadow: `0 0 10px ${theme.primary}80` }}
           >
-            {portfolioData.name}
+            {portfolioData.name} {/* Uses loaded data */}
           </h1>
           <p
             className="text-xl mb-10 max-w-3xl mx-auto"
             style={{ color: theme.textSecondary }}
           >
-            {portfolioData.tagline}
+            {portfolioData.tagline} {/* Uses loaded data */}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
@@ -314,7 +313,8 @@ const App = () => {
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {portfolioData.skills.map((skill, index) => (
+          {/* Uses loaded data */}
+          {portfolioData.skills && portfolioData.skills.map((skill, index) => (
             <div
               key={index}
               className="p-6 rounded-lg"
@@ -373,7 +373,8 @@ const App = () => {
           </p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {portfolioData.projects.map((project) => (
+          {/* Uses loaded data */}
+          {portfolioData.projects && portfolioData.projects.map((project) => (
             <div
               key={project.id}
               className="rounded-lg overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-1"
@@ -404,7 +405,7 @@ const App = () => {
                   {project.description}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech, idx) => (
+                  {project.technologies && project.technologies.map((tech, idx) => (
                     <span
                       key={idx}
                       className="px-2 py-1 text-xs rounded"
@@ -520,7 +521,8 @@ const App = () => {
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {portfolioData.articles.map((article) => (
+            {/* Uses loaded data */}
+            {portfolioData.articles && portfolioData.articles.map((article) => (
               <div
                 key={article.id}
                 className="rounded-lg overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 cursor-pointer"
@@ -628,9 +630,8 @@ const App = () => {
             </div> */}
             <div className="md:w-2/3">
               <div className="prose prose-invert max-w-none">
-                <p
-                  style={{ color: theme.textSecondary }}
-                >
+                {/* Uses loaded data */}
+                <p style={{ color: theme.textSecondary }}>
                   {portfolioData.about.text}
                 </p>
               </div>
@@ -695,6 +696,7 @@ const App = () => {
                     >
                       Email
                     </h4>
+                    {/* Uses loaded data */}
                     <a
                       href={`mailto:${portfolioData.contact.email}`}
                       className="transition-colors hover:underline"
@@ -717,6 +719,7 @@ const App = () => {
                     >
                       Telefon
                     </h4>
+                    {/* Uses loaded data */}
                     <a
                       href={`tel:${portfolioData.contact.phone}`}
                       className="transition-colors hover:underline"
@@ -739,12 +742,14 @@ const App = () => {
                     >
                       Lokace
                     </h4>
+                    {/* Uses loaded data */}
                     <p style={{ color: theme.textSecondary }}>
                       {portfolioData.contact.address}
                     </p>
                   </div>
                 </div>
                 <div className="flex space-x-4 pt-4">
+                  {/* Uses loaded data */}
                   <a
                     href={portfolioData.contact.github}
                     target="_blank"
@@ -793,6 +798,7 @@ const App = () => {
               >
                 Máte nápad na webový projekt? Rád se s vámi o něj podělím a pomohu ho uskutečnit.
               </p>
+              {/* Uses loaded data */}
               <a
                 href={`mailto:${portfolioData.contact.email}`}
                 className="inline-block px-6 py-3 rounded font-bold transition-all duration-300 border"
@@ -833,7 +839,6 @@ const App = () => {
             <Projects />
           </>
         );
-      
       case 'skills':
         return <Skills />;
       case 'projects':
@@ -848,6 +853,7 @@ const App = () => {
         return (
           <>
             <Hero />
+            <About /> {/* Added About to default as requested */}
             <Skills />
             <Projects />
           </>
@@ -887,14 +893,14 @@ const App = () => {
                   className="ml-3 text-xl font-bold"
                   style={{ color: theme.primary }}
                 >
-                  {portfolioData.name}
+                  {portfolioData.name} {/* Uses loaded data */}
                 </span>
               </div>
               <p
                 className="mb-4"
                 style={{ color: theme.textSecondary }}
               >
-                {portfolioData.tagline}
+                {portfolioData.tagline} {/* Uses loaded data */}
               </p>
             </div>
             <div>
@@ -936,6 +942,7 @@ const App = () => {
                 Kontakt
               </h3>
               <div className="space-y-2" style={{ color: theme.textSecondary }}>
+                {/* Uses loaded data */}
                 <p>{portfolioData.contact.email}</p>
                 <p>{portfolioData.contact.phone}</p>
                 <p>{portfolioData.contact.address}</p>
@@ -946,7 +953,7 @@ const App = () => {
             className="border-t mt-8 pt-8 text-center text-sm"
             style={{ borderColor: `${theme.textSecondary}40`, color: theme.textSecondary }}
           >
-            <p>&copy; {new Date().getFullYear()} {portfolioData.name}. Všechna práva vyhrazena.</p>
+            <p>&copy; {new Date().getFullYear()} {portfolioData.name}. Všechna práva vyhrazena.</p> {/* Uses loaded data */}
           </div>
         </div>
       </footer>

@@ -1,0 +1,12 @@
+{
+  "name": "Vojtěch Tabačík",
+  "tagline": "Frontend Developer & UI/UX Designer",
+  "bio": "Jsem vášnivý frontend developer a designér s rámcem pro vytváření intuitivních a vizuálně úžasných webových aplikací. Mám rád výzvy a neustále se učím novým technologiím.",
+  "contact": {
+    "email": "vojtech@tabacik.cz",
+    "phone": "+420 123 456 789",
+    "address": "Praha, Česká republika",
+    "github": "https://github.com/vas_github",
+    "linkedin": "https://linkedin.com/in/vas_linkedin"
+  }
+}

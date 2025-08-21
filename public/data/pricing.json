@@ -1,8 +1,0 @@
-[
-  { "service": "První návštěva", "price": "1 200 Kč" },
-  { "service": "Běžná návštěva (30 minut)", "price": "800 Kč" },
-  { "service": "Dlouhá návštěva (60 minut)", "price": "1 500 Kč" },
-  { "service": "Terapie pro děti (30 minut)", "price": "800 Kč" },
-  { "service": "Terapie pro děti (60 minut)", "price": "1 500 Kč" },
-  { "service": "Online konzultace (30 minut)", "price": "1700 Kč" }
-]
