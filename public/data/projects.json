@@ -3,7 +3,12 @@
     "id": 1,
     "title": "E-commerce Platform",
     "description": "Moderní e-shop postavený na React a Node.js s pokročilým vyhledáváním a filtry.",
-    "technologies": ["React", "Node.js", "MongoDB", "Stripe"],
+    "technologies": [
+      "React",
+      "Node.js",
+      "MongoDB",
+      "Stripe"
+    ],
     "image": "/images/project1.jpg",
     "link": "#"
   },
@@ -11,7 +16,11 @@
     "id": 2,
     "title": "Task Management App",
     "description": "Aplikace pro správu úkolů s drag-and-drop funkcí a real-time spoluprací.",
-    "technologies": ["React", "Firebase", "Material-UI"],
+    "technologies": [
+      "React",
+      "Firebase",
+      "Material-UI"
+    ],
     "image": "/images/project2.jpg",
     "link": "#"
   },
@@ -19,8 +28,20 @@
     "id": 3,
     "title": "Portfolio Website",
     "description": "Responsive portfolio webová stránka s animacemi a optimalizovaným UX.",
-    "technologies": ["React", "Framer Motion", "Tailwind CSS"],
+    "technologies": [
+      "React",
+      "Framer Motion",
+      "Tailwind CSS"
+    ],
     "image": "/images/project3.jpg",
     "link": "#"
+  },
+  {
+    "id": "1755807739098",
+    "title": "Test",
+    "description": "test",
+    "image": "/images/uploaded_1755807789166_young-happy-positive-teenager-man-gesturing-ok-isolated-white-background-40784002.webp",
+    "link": "",
+    "technologies": []
   }
 ]
