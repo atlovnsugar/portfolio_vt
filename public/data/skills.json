@@ -1,26 +1,34 @@
 [
   {
-    "name": "JavaScript (ES6+)",
+    "name": "Excel",
     "level": 90
-  },
-  {
-    "name": "React",
-    "level": 85
-  },
-  {
-    "name": "HTML5 / CSS3",
-    "level": 95
-  },
-  {
-    "name": "UI/UX Design",
-    "level": 80
-  },
-  {
-    "name": "Node.js",
-    "level": 70
   },
   {
     "name": "Git / CI/CD",
     "level": 75
+  },
+  {
+    "name": "R",
+    "level": 50
+  },
+  {
+    "name": "Python",
+    "level": 50
+  },
+  {
+    "name": "Node.js",
+    "level": 20
+  },
+  {
+    "name": "HTML5 / CSS3",
+    "level": 15
+  },
+  {
+    "name": "JavaScript (ES6+)",
+    "level": 10
+  },
+  {
+    "name": "React",
+    "level": 10
   }
 ]
